@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('profiles', function (Blueprint $table) {
-            $table->string('name')->after('user_id');
-        });
+        if (!Schema::hasColumn('profiles', 'name')) {
+            Schema::table('profiles', function (Blueprint $table) {
+                $table->string('name')->after('user_id');
+            });
+        }
     }
 
     /**
